@@ -20,7 +20,7 @@ function updateFigureReference(bookmarkObj, figureNumber, bookmarkObjs, paragrap
   // update bookmark link (both text and link)
   var adjustment = 0;
   for (var [parKey, linkObj] of bookmarkObj.linkMap.entries()) {
-    adjustment = updateLinkText(linkObj.paraTextObj, 'Figure ' + figureNumber, linkObj.start, linkObj.end, url);
+    adjustment = updateLinkText(linkObj.paraTextObj, 'Fig. ' + figureNumber, linkObj.start, linkObj.end, url);
 
     // update positions of sequential reference links in the same paragraph
     adjustPositions(bookmarkObjs, paragraphMap, bookmarkMap, parKey, bookmarkObj.bookmarkId, adjustment);
@@ -41,6 +41,15 @@ function updateFigureBookmarkText(textOjb, num) {
   var start, end;
   var flag = true;
   var text = textOjb.getText();
+
+  // if starting with fig. xxx
+  start = text.search(/[fF]ig\.\s*[0-9]+\./);
+  if (start != -1) {
+    end = text.split('.')[0].length+1+text.split('.')[1].length;
+    updateText(textOjb, ' ' + num + '.', start+4, end);
+    flag = false;
+    return;
+  }
 
   // if starting with figure xxx
   start = text.search(/[fF]igure\s*[0-9]+\./);

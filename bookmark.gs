@@ -247,7 +247,7 @@ function getObjType(paragraphOjb) {
   if (headingTypes.has(paragraphOjb.getHeading()) && paragraphOjb.getNumChildren() > 0) {
     return 'heading';
   } else if ((prevObj && prevObj.getType() == DocumentApp.ElementType.TABLE) || (nextObj && nextObj.getType() == DocumentApp.ElementType.TABLE)) {
-    return 'table';
+    return 'figure';
   } else if ((prevObj && prevObj.getNumChildren() > 0 && prevObj.getChild(0).getType() == DocumentApp.ElementType.INLINE_IMAGE) ||
              (nextObj && nextObj.getNumChildren() > 0 && nextObj.getChild(0).getType() == DocumentApp.ElementType.INLINE_IMAGE)) {
     return 'figure';
